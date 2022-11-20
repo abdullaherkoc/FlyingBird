@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - Column
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,7 @@ TagManager:
     locked: 0
   - name: SortingLayer_3
     uniqueID: 809683895
+    locked: 0
+  - name: Canvas
+    uniqueID: 759627899
     locked: 0

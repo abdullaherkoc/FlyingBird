@@ -28,8 +28,12 @@ public class LeftMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y);
 
+        if (GameManager.gameOver == false)
+        {
+            transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y);
+        }
+       
         if (gameObject.CompareTag("Ground"))
         {
             if (transform.position.x <= -groundWidth)
@@ -40,16 +44,15 @@ public class LeftMovement : MonoBehaviour
         }
         else if (gameObject.CompareTag("Obstacle"))
         {
-            if (true)
+            if (transform.position.x < GameManager.bottomLeft.x - obstackleWidth)
             {
-
+                Destroy(gameObject);
             }
         }
-
-
-
-
-
     }
+
+
+
+
 
 }
