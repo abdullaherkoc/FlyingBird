@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static Vector2 bottomLeft;
     public static bool gameOver;
     public GameObject gameOverPanel;
+    public static bool gameStarted;
+    public GameObject GetReady;
 
 
     private void Awake()
@@ -16,11 +18,19 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameOver = false;
+        gameStarted = false;
     }
     public void RessartButon()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void GameHasStarted()
+    {
+        gameStarted = true;
+        GetReady.SetActive(false);
+    }
+
     public void GameOver()
     {
         gameOver = true;

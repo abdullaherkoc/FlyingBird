@@ -11,7 +11,7 @@ public class Score : MonoBehaviour
     int hightScore;
 
     public Text panelScore;
-    public Text panelHighScor;
+    public Text panelHighScore;
 
     private void Start()
     {
@@ -19,6 +19,8 @@ public class Score : MonoBehaviour
         _scoreText = GetComponent<Text>();
         _scoreText.text = _score.ToString();
         panelScore.text = _score.ToString();
+        hightScore = PlayerPrefs.GetInt("highscore");
+        panelHighScore.text = hightScore.ToString();
     }
 
     public void Scored()
@@ -26,5 +28,13 @@ public class Score : MonoBehaviour
         _score++;
         _scoreText.text = _score.ToString();
         panelScore.text = _score.ToString();
+
+        if (_score > hightScore)
+        {
+            hightScore = _score;
+            panelHighScore.text = hightScore.ToString();
+            PlayerPrefs.SetInt("highscore", hightScore);
+        }
+
     }
 }

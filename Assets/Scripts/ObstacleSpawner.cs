@@ -13,12 +13,12 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Start()
     {
-        InstantieObstacle();
+        //InstantieObstacle();
     }
 
     private void Update()
     {
-        if (GameManager.gameOver == false)
+        if (GameManager.gameOver == false && GameManager.gameStarted == true)
         {
             timer += Time.deltaTime;
             if (timer >= maxTime)
@@ -28,7 +28,7 @@ public class ObstacleSpawner : MonoBehaviour
                 timer = 0;
             }
         }
-    
+
     }
 
     public void InstantieObstacle()

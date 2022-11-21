@@ -14,9 +14,11 @@ public class Fish : MonoBehaviour
     bool touchGround;
     public GameManager gameManager;
     public Animator anim;
+    public ObstacleSpawner obstacleSpawner;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _rb.gravityScale = 0;
         anim = GetComponent<Animator>();
     }
     private void Update()
@@ -35,8 +37,21 @@ public class Fish : MonoBehaviour
         transform.position = new Vector2(transform.position.x * Time.deltaTime, transform.position.y);
         if (Input.GetMouseButtonDown(0) && GameManager.gameOver == false)
         {
-            _rb.velocity = Vector2.zero;
-            _rb.velocity = new Vector2(_rb.velocity.x, _speed);
+            if (GameManager.gameStarted == false)
+            {
+                _rb.gravityScale = 4f;
+                _rb.velocity = Vector2.zero;
+                _rb.velocity = new Vector2(_rb.velocity.x, _speed);
+                obstacleSpawner.InstantieObstacle();
+                gameManager.GameHasStarted();
+
+            }
+            else
+            {
+                _rb.velocity = Vector2.zero;
+                _rb.velocity = new Vector2(_rb.velocity.x, _speed);
+            }
+           
         }
     }
 
