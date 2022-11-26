@@ -15,6 +15,9 @@ public class Fish : MonoBehaviour
     public GameManager gameManager;
     public Animator anim;
     public ObstacleSpawner obstacleSpawner;
+    [SerializeField]
+    private AudioSource _swim, _hit, _point;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -37,6 +40,7 @@ public class Fish : MonoBehaviour
         transform.position = new Vector2(transform.position.x * Time.deltaTime, transform.position.y);
         if (Input.GetMouseButtonDown(0) && GameManager.gameOver == false)
         {
+            _swim.Play();
             if (GameManager.gameStarted == false)
             {
                 _rb.gravityScale = 4f;
@@ -51,7 +55,7 @@ public class Fish : MonoBehaviour
                 _rb.velocity = Vector2.zero;
                 _rb.velocity = new Vector2(_rb.velocity.x, _speed);
             }
-           
+
         }
     }
 
@@ -84,10 +88,12 @@ public class Fish : MonoBehaviour
         if (collision.CompareTag("Obstacle"))
         {
             score.Scored();
+            _point.Play();
         }
         else if (collision.CompareTag("Column"))
         {
             gameManager.GameOver();
+            _hit.Play();
             GameOver();
         }
     }
@@ -98,6 +104,7 @@ public class Fish : MonoBehaviour
         {
             if (GameManager.gameOver == false)
             {
+                _hit.Play();
                 gameManager.GameOver();
                 anim.enabled = false;
 
